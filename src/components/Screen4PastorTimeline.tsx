@@ -5,6 +5,8 @@ import { CongratulatoryNote, ScreenId } from '../types/magazine';
 import { CongratulatoryModal } from './CongratulatoryModal';
 import { SubscribeBanner } from './SubscribeBanner';
 import { playTickSound, playChimeSound } from '../utils/audio';
+import multimediaBundleImg from '../assets/images/The-Multimedia-Spotlight-Bundle.png';
+import pastorAnniversaryImg from '../assets/images/pastor_anniversary_1792624673820.jpg';
 
 interface Screen4PastorTimelineProps {
   onNext: () => void;
@@ -117,12 +119,17 @@ export function Screen4PastorTimeline({ onNext, onNavigate }: Screen4PastorTimel
       {/* Multimedia Spotlight Bundle Full-Width Header Image */}
       <div className="w-full max-w-2xl mx-auto mb-8 sm:mb-10 overflow-hidden rounded-2xl border border-stone-200 shadow-lg bg-stone-100 flex justify-center">
         <img
-          src="/src/assets/images/The-Multimedia-Spotlight-Bundle.png"
+          src={multimediaBundleImg || '/assets/images/The-Multimedia-Spotlight-Bundle.png'}
           alt="The Multimedia Spotlight Bundle — Pastor 29th Anniversary Feature"
           className="w-full h-auto object-contain block"
           referrerPolicy="no-referrer"
           onError={(e) => {
-            e.currentTarget.src = "https://i.postimg.cc/Fhg254gD/The-Multimedia-Spotlight-Bundle.png";
+            const target = e.currentTarget;
+            if (!target.src.includes('The-Multimedia-Spotlight-Bundle.png')) {
+              target.src = '/assets/images/The-Multimedia-Spotlight-Bundle.png';
+            } else if (!target.src.includes('postimg.cc')) {
+              target.src = "https://i.postimg.cc/Fhg254gD/The-Multimedia-Spotlight-Bundle.png";
+            }
           }}
         />
       </div>
@@ -150,10 +157,18 @@ export function Screen4PastorTimeline({ onNext, onNavigate }: Screen4PastorTimel
           <div className="relative rounded-lg overflow-hidden border border-stone-300 shadow-lg bg-stone-900">
             <div className="aspect-[4/3] overflow-hidden">
               <img
-                src="/src/assets/images/pastor_anniversary_1792624673820.jpg"
+                src={pastorAnniversaryImg || '/assets/images/pastor_anniversary_1792624673820.jpg'}
                 alt="Celebrating 29 Years of Faithful Ministry - Pastor and Congregation"
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (!target.src.includes('pastor_anniversary_1792624673820.jpg')) {
+                    target.src = '/assets/images/pastor_anniversary_1792624673820.jpg';
+                  } else if (!target.src.includes('unsplash.com')) {
+                    target.src = "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80";
+                  }
+                }}
               />
             </div>
             <div className="p-4 bg-stone-900/90 text-stone-200 text-xs flex justify-between items-center border-t border-stone-800">

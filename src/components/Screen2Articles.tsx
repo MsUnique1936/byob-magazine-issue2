@@ -4,6 +4,8 @@ import { StoryModal } from './StoryModal';
 import { SubscribeBanner } from './SubscribeBanner';
 import { ScreenId } from '../types/magazine';
 import { playTickSound, playChimeSound } from '../utils/audio';
+import grandpreneurImg from '../assets/images/The-VIP-Grandpreneur-Experience.png';
+import womenFaithImg from '../assets/images/women_faith_feature_1792624673252.jpg';
 
 interface Screen2ArticlesProps {
   onNext: () => void;
@@ -48,12 +50,17 @@ export function Screen2Articles({ onNext, onNavigate }: Screen2ArticlesProps) {
       {/* Full-resolution Grandpreneur Cover Image with Natural Aspect Ratio */}
       <div className="w-full max-w-2xl mx-auto mb-8 sm:mb-10 overflow-hidden rounded-2xl border border-stone-200 shadow-lg bg-stone-100 flex justify-center">
         <img
-          src="/src/assets/images/The-VIP-Grandpreneur-Experience.png"
+          src={grandpreneurImg || '/assets/images/The-VIP-Grandpreneur-Experience.png'}
           alt="The VIP Grandpreneur Experience Cover — Women of Faith Feature"
           className="w-full h-auto object-contain block"
           referrerPolicy="no-referrer"
           onError={(e) => {
-            e.currentTarget.src = "https://i.postimg.cc/dJmzPYm5/The-VIP-Grandpreneur-Experience.png";
+            const target = e.currentTarget;
+            if (!target.src.includes('The-VIP-Grandpreneur-Experience.png')) {
+              target.src = '/assets/images/The-VIP-Grandpreneur-Experience.png';
+            } else if (!target.src.includes('postimg.cc')) {
+              target.src = "https://i.postimg.cc/dJmzPYm5/The-VIP-Grandpreneur-Experience.png";
+            }
           }}
         />
       </div>
@@ -65,10 +72,18 @@ export function Screen2Articles({ onNext, onNavigate }: Screen2ArticlesProps) {
           <div className="relative group rounded-lg overflow-hidden border border-stone-200 bg-stone-100 shadow-md">
             <div className="aspect-[4/3] overflow-hidden">
               <img
-                src="/src/assets/images/women_faith_feature_1792624673252.jpg"
+                src={womenFaithImg || '/assets/images/women_faith_feature_1792624673252.jpg'}
                 alt="Women of Faith Profile - Ordinary Women, Extraordinary Calling"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102"
                 referrerPolicy="no-referrer"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (!target.src.includes('women_faith_feature_1792624673252.jpg')) {
+                    target.src = '/assets/images/women_faith_feature_1792624673252.jpg';
+                  } else if (!target.src.includes('unsplash.com')) {
+                    target.src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80";
+                  }
+                }}
               />
             </div>
             <div className="p-4 bg-stone-50 border-t border-stone-200">

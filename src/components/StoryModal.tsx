@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { X, Volume2, VolumeX, Bookmark, Check, Share2, Radio, Headphones, ExternalLink } from 'lucide-react';
 import { playChimeSound, playTickSound } from '../utils/audio';
+import grandpreneurCoverImg from '../assets/images/The-VIP-Grandpreneur-Experience.png';
 
 interface StoryModalProps {
   isOpen: boolean;
@@ -93,12 +94,17 @@ export function StoryModal({ isOpen, onClose, onNext, onNavigate }: StoryModalPr
           {/* Grandpreneur Cover Image Banner at Top of Article */}
           <div className="w-full max-w-xl mx-auto overflow-hidden rounded-xl border border-stone-200 shadow-md bg-stone-100 flex justify-center">
             <img
-              src="/src/assets/images/The-VIP-Grandpreneur-Experience.png"
+              src={grandpreneurCoverImg || '/assets/images/The-VIP-Grandpreneur-Experience.png'}
               alt="The VIP Grandpreneur Experience Cover — Women of Faith Feature"
               className="w-full h-auto object-contain block"
               referrerPolicy="no-referrer"
               onError={(e) => {
-                e.currentTarget.src = "https://i.postimg.cc/dJmzPYm5/The-VIP-Grandpreneur-Experience.png";
+                const target = e.currentTarget;
+                if (!target.src.includes('The-VIP-Grandpreneur-Experience.png')) {
+                  target.src = '/assets/images/The-VIP-Grandpreneur-Experience.png';
+                } else if (!target.src.includes('postimg.cc')) {
+                  target.src = "https://i.postimg.cc/dJmzPYm5/The-VIP-Grandpreneur-Experience.png";
+                }
               }}
             />
           </div>

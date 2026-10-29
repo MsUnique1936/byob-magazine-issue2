@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { ScreenId } from '../types/magazine';
 import { playChimeSound, playTickSound } from '../utils/audio';
+import coverArtImg from '../assets/images/magazine_cover_art_1792624672951.jpg';
 
 interface Screen1CoverProps {
   onStartJourney: () => void;
@@ -186,13 +187,17 @@ export function Screen1Cover({ onStartJourney, onNavigate }: Screen1CoverProps) 
               {/* Cover Image with Fallback */}
               <div className="relative aspect-[3/4] overflow-hidden bg-stone-900">
                 <img
-                  src="/src/assets/images/magazine_cover_art_1792624672951.jpg"
+                  src={coverArtImg || '/assets/images/magazine_cover_art_1792624672951.jpg'}
                   alt="BYOB Magazine Issue 02 Cover Art - Kingdom Builders: Ordinary People. Extraordinary Faith."
                   className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-102"
                   referrerPolicy="no-referrer"
                   onError={(e) => {
-                    // Fallback container in case of asset loading failure
-                    e.currentTarget.style.display = 'none';
+                    const target = e.currentTarget;
+                    if (!target.src.includes('magazine_cover_art_1792624672951.jpg')) {
+                      target.src = '/assets/images/magazine_cover_art_1792624672951.jpg';
+                    } else if (!target.src.includes('unsplash.com')) {
+                      target.src = 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80';
+                    }
                   }}
                 />
 

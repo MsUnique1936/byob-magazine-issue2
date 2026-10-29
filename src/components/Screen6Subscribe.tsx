@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Mail, Check, Sparkles, BookOpen, Heart, Bell, ShieldCheck, ArrowLeft, Send } from 'lucide-react';
 import { ScreenId } from '../types/magazine';
 import { playChimeSound, playTickSound } from '../utils/audio';
+import subscribeHeroImg from '../assets/images/Subscribe-BYOB.png';
 
 interface Screen6SubscribeProps {
   onNavigate: (screen: ScreenId) => void;
@@ -49,12 +50,17 @@ export function Screen6Subscribe({ onNavigate }: Screen6SubscribeProps) {
       {/* 1. High-Resolution Subscribe Image Banner at Top with Matching Rounded Corners */}
       <div className="w-full max-w-2xl mx-auto mb-10 overflow-hidden rounded-2xl border border-stone-200 shadow-xl bg-stone-100 flex justify-center">
         <img
-          src="/src/assets/images/Subscribe-BYOB.png"
+          src={subscribeHeroImg || '/assets/images/Subscribe-BYOB.png'}
           alt="Subscribe to BYOB Magazine — Build Your Own Belief"
           className="w-full h-auto object-contain block"
           referrerPolicy="no-referrer"
           onError={(e) => {
-            e.currentTarget.src = 'https://i.postimg.cc/fMj6nNjf/Subscribe-BYOB.png';
+            const target = e.currentTarget;
+            if (!target.src.includes('Subscribe-BYOB.png')) {
+              target.src = '/assets/images/Subscribe-BYOB.png';
+            } else if (!target.src.includes('postimg.cc')) {
+              target.src = 'https://i.postimg.cc/fMj6nNjf/Subscribe-BYOB.png';
+            }
           }}
         />
       </div>

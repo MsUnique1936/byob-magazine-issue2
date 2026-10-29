@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Mail, Check, Sparkles, ArrowRight } from 'lucide-react';
 import { playChimeSound, playTickSound } from '../utils/audio';
+import subscribeImg from '../assets/images/Subscribe-BYOB.png';
 
 interface SubscribeBannerProps {
   onOpenSubscribePage?: () => void;
@@ -28,12 +29,17 @@ export function SubscribeBanner({ onOpenSubscribePage }: SubscribeBannerProps) {
         <div className="lg:col-span-5 flex justify-center">
           <div className="relative w-full max-w-sm overflow-hidden rounded-xl border border-stone-200/90 shadow-md bg-stone-900 group">
             <img
-              src="/src/assets/images/Subscribe-BYOB.png"
+              src={subscribeImg || '/assets/images/Subscribe-BYOB.png'}
               alt="Subscribe to BYOB Magazine — Build Your Own Belief"
               className="w-full h-auto object-contain block transition-transform duration-500 group-hover:scale-102"
               referrerPolicy="no-referrer"
               onError={(e) => {
-                e.currentTarget.src = 'https://i.postimg.cc/fMj6nNjf/Subscribe-BYOB.png';
+                const target = e.currentTarget;
+                if (!target.src.includes('Subscribe-BYOB.png')) {
+                  target.src = '/assets/images/Subscribe-BYOB.png';
+                } else if (!target.src.includes('postimg.cc')) {
+                  target.src = 'https://i.postimg.cc/fMj6nNjf/Subscribe-BYOB.png';
+                }
               }}
             />
           </div>
