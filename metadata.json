@@ -1,0 +1,6 @@
+{
+  "name": "BYOB Magazine — Issue 02: Kingdom Builders",
+  "description": "BYOB Magazine (Build Your Own Belief) — Issue 02 (Est. 2024, Fall/Winter 2026). Kingdom Builders: Ordinary People. Extraordinary Faith. Edited by Marshia Salcedo, Editor-in-Chief.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
